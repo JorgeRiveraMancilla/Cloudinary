@@ -49,4 +49,11 @@ export class PhotoListComponent implements OnInit {
   loadPhotos(): void {
     this.photos$ = this.photoService.getPhotos();
   }
+
+  deletePhoto(photoId: number) {
+    this.photoService.deletePhoto(photoId).subscribe({
+      next: () => this.loadPhotos(),
+      error: error => console.log(error)
+    })
+  }
 }

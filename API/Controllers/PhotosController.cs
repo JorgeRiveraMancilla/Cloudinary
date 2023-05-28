@@ -46,5 +46,20 @@ namespace API.Controllers
             
             return BadRequest("Error");
         }
+
+        [HttpDelete("{photoId:int}")]
+        public async Task<ActionResult> DeletePhoto(int photoId)
+        {
+            var photo = await _dataContext.Photos.FirstOrDefaultAsync(x => x.Id == photoId);
+
+            if (photo == null) return NotFound();
+
+            _dataContext.Photos.Remove(photo);
+
+            if (0 < await _dataContext.SaveChangesAsync())
+                return Ok();
+
+            return BadRequest("Error");
+        }
     }
 }
