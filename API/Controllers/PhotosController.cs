@@ -54,6 +54,7 @@ namespace API.Controllers
 
             if (photo == null) return NotFound();
 
+            await _photoService.DeletePhotoAsync(photo.PublicId);
             _dataContext.Photos.Remove(photo);
 
             if (0 < await _dataContext.SaveChangesAsync())
