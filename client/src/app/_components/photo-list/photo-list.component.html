@@ -1,0 +1,35 @@
+<div class="row g-3 mb-4 mx-2" *ngIf="uploader">
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+    </div>
+
+    <div class="col-auto">
+        <input type="file" class="form-control" ng2FileSelect [uploader]="uploader" #inputFile>
+    </div>
+
+    <div class="col-auto">
+        <button
+            type="submit"
+            class="btn btn-primary"
+            (click)="uploader.uploadAll()"
+            [disabled]="!uploader.getNotUploadedItems().length"
+        >
+            Agregar
+        </button>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-2" *ngFor="let photo of photos$ | async">
+        <div class="card mb-4">
+            <div class="card-img-wrapper">
+                <img src="{{ photo.url }}" alt="{{ photo.id }}" class="card-img-top">
+            </div>
+            
+            <div class="card-body p-2">
+                <button type="button" class="btn btn-primary">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
