@@ -14,10 +14,10 @@ namespace API.Data.Migrations
                 name: "photos",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    url = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    public_id = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    url = table.Column<string>(type: "TEXT", nullable: true),
+                    public_id = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
