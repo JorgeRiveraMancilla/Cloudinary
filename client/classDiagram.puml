@@ -1,0 +1,42 @@
+@startuml
+skin rose
+
+package client {
+  package _components {
+    class NavComponent {
+    }
+
+    class PhotoListComponent {
+      - uploader: FileUploader
+      - photoService: PhotoService
+      - photos$: Observable<Photo[]>
+      + PhotoListComponent()
+      + initializeUploader(): void
+      + loadPhotos(): void
+      + deletePhoto(photoId: number): void
+    }
+  }
+
+  package _models {
+    interface Photo {
+      + id: number
+      + url: string
+      + publicId: string
+    }
+  }
+
+  package _services {
+    class PhotoService {
+      - http: HttpClient
+      + PhotoService()
+      + getPhotos(): Observable<Photo[]>
+      + deletePhoto(photoId: number): Observable<void>
+    }
+  }
+}
+
+PhotoService .left.> Photo: use
+PhotoListComponent "1" -down-> "1" PhotoService: has
+PhotoListComponent ..> Photo: use
+
+@enduml

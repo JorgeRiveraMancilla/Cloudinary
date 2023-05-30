@@ -1,0 +1,60 @@
+@startuml
+skin rose
+
+package API {
+    package Controllers {
+        class PhotosController {
+            - _dataContext: DataContext
+            - _photoService: IPhotoService
+            + PhotosController()
+            + GetPhotos(): PhotoDto[]
+            + AddPhoto(file: IFormFile): void
+            + DeletePhoto(photoId: int): void
+        }
+    }
+    
+    package Data {
+        class DataContext {
+            + Photos: DbSet<AppPhoto>
+            + DataContext()
+        }
+    }
+    
+    package Entities {
+        class AppPhoto {
+            + Id: int
+            + Url: string
+            + PublicId: string
+        }
+    }
+    
+    package Helpers {
+        class CloudinarySettings {
+            + CloudName: string
+            + ApiKey: string
+            + ApiSecret: string
+        }
+    }
+    
+    package Interfaces {
+        interface IPhotoService {
+            + AddPhotoAsync(file: IFormFile): ImageUploadResult
+            + DeletePhotoAsync(publicId: string): DeletionResult
+        }
+    }
+    
+    package Services {
+        class PhotoService {
+            - _cloudinary: Cloudinary
+            + PhotoService(config: IOptions<CloudinarySettings>)
+        }
+    }
+}
+
+IPhotoService <|.down. PhotoService: implements
+PhotoService .down.> CloudinarySettings: use
+PhotosController "1" -down-> "1" DataContext: has
+PhotosController "1" -left-> "1" IPhotoService: has
+DataContext o-down->"*" AppPhoto
+PhotosController .down.> AppPhoto: use
+@enduml

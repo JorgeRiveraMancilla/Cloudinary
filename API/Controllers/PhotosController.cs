@@ -1,5 +1,4 @@
 using API.Data;
-using API.DTOs;
 using API.Entities;
 using API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +18,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<PhotoDto[]>> GetPhotos()
+        public async Task<ActionResult<AppPhoto[]>> GetPhotos()
         {
             var photos = await _dataContext.Photos.ToListAsync();
 

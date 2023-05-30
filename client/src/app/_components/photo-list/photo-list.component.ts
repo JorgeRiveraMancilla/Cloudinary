@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment.development';
 export class PhotoListComponent implements OnInit {
   @ViewChild('inputFile') inputFile: ElementRef | undefined;
   uploader: FileUploader | undefined;
-  baseUrl = environment.apiUrl;
+  baseUrl: string = environment.apiUrl;
 
   photos$: Observable<Photo[]> | undefined;
 
@@ -50,7 +50,7 @@ export class PhotoListComponent implements OnInit {
     this.photos$ = this.photoService.getPhotos();
   }
 
-  deletePhoto(photoId: number) {
+  deletePhoto(photoId: number): void {
     this.photoService.deletePhoto(photoId).subscribe({
       next: () => this.loadPhotos(),
       error: error => console.log(error)
