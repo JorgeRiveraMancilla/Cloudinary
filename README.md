@@ -2,9 +2,13 @@
 
 Cloudinary is a Software-as-a-Service (SaaS) solution for managing all your web or mobile application's media assets in the cloud.
 
-## API Installation
+## Installation
 
-Inside the API folder, run the following commands.
+Inside the Cloudinary folder, run the following commands.
+
+```bash
+cd API
+```
 
 ```bash
 dotnet restore
@@ -18,9 +22,13 @@ dotnet ef database update
 dotnet watch
 ```
 
-## Angular Client Installation
+```bash
+cd ..
+```
 
-Inside the client folder, run the following commands.
+```bash
+cd client
+```
 
 ```bash
 npm install --legacy-peer-deps
